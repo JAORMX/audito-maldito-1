@@ -85,6 +85,10 @@ spec:
         imagePullPolicy: Always
         securityContext:
           allowPrivilegeEscalation: false
+        resources:
+          limits:
+            memory: "50Mi"
+            cpu: "500m"
         volumeMounts:
         - name: varlog
           mountPath: /var/log
