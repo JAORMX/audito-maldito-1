@@ -36,7 +36,7 @@ spec:
         volumeMounts:
           - mountPath: /app-audit
             name: audit-logs
-      - name: init audit-pipe
+      - name: init-audit-pipe
         image: ghcr.io/metal-toolbox/audittail:v0.5.0
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:
@@ -53,7 +53,7 @@ spec:
         volumeMounts:
           - mountPath: /app-audit
             name: audit-logs
-      - name: init sshd-pipe
+      - name: init-sshd-pipe
         image: ghcr.io/metal-toolbox/audittail:v0.5.0
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:
