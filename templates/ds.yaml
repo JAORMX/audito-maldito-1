@@ -36,6 +36,40 @@ spec:
         volumeMounts:
           - mountPath: /app-audit
             name: audit-logs
+      - name: init audit-pipe
+        image: ghcr.io/metal-toolbox/audittail:v0.5.0
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+        args:
+          - 'init'
+          - '-f'
+          - '/var/log/audito-maldito/audit-pipe'
+        resources:
+          limits:
+            memory: "50Mi"
+            cpu: "500m"
+        volumeMounts:
+          - mountPath: /app-audit
+            name: audit-logs
+      - name: init sshd-pipe
+        image: ghcr.io/metal-toolbox/audittail:v0.5.0
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+        args:
+          - 'init'
+          - '-f'
+          - '/var/log/audito-maldito/sshd-pipe'
+        resources:
+          limits:
+            memory: "50Mi"
+            cpu: "500m"
+        volumeMounts:
+          - mountPath: /app-audit
+            name: audit-logs
       containers:
       - image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: Always
