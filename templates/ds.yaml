@@ -80,6 +80,18 @@ spec:
         volumeMounts:
           - mountPath: /app-audit
             name: audit-logs
+      - name: rsyslog
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}-rsyslog"
+        imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+          readOnly: true
+        - name: machineid
+          mountPath: /etc/machine-id
+          readOnly: true            
       volumes:
         - name: audit-logs
           emptyDir: {}
@@ -98,15 +110,3 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
       {{- end }}
-      - name: rsyslog
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}-rsyslog"
-        imagePullPolicy: Always
-        securityContext:
-          allowPrivilegeEscalation: false
-        volumeMounts:
-        - name: varlog
-          mountPath: /var/log
-          readOnly: true
-        - name: machineid
-          mountPath: /etc/machine-id
-          readOnly: true
