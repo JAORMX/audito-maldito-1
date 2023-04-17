@@ -135,7 +135,9 @@ spec:
           readOnly: true
         - name: machineid
           mountPath: /etc/machine-id
-          readOnly: true            
+          readOnly: true
+        - mountPath: /app-audit
+          name: audit-logs
       volumes:
         - name: audit-logs
           emptyDir: {}
