@@ -2,9 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 image:
-  repository: ghcr.io/metal-toolbox/audito-maldito/audito-maldito
+  repository: ghcr.io/angrieralien/audito-maldito
   pullPolicy: IfNotPresent
-  tag: "v0.1.7"
+  tag: "named-pipe-abstraction"
 resources:
   limits:
     cpu: 1
